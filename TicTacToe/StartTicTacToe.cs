@@ -9,57 +9,42 @@ namespace TicTacToe
 {
     public class StartTicTacToe
     {
-        public char Player;
-        public char Letter;
-
-        public StartTicTacToe(char player, char letter)
-        {
-            this.Player = player;
-            this.Letter = letter;
-        }
 
         public static void Main(string[] args)
         {
+            var player = '1';
+            var letter = 'X';
             var currentBoard = "...\n" +
                                "...\n" +
                                "...";
             Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + currentBoard);
 
-            StartTicTacToe game = new StartTicTacToe('1', 'X');
+            StartTicTacToe game = new StartTicTacToe();
 
             do
             {
-                currentBoard = game.GetPlayerCoord(currentBoard);
-                game.NextPlayer();
+                currentBoard = game.GetPlayerCoord(currentBoard, player, letter);
+                game.GetNextPlayer(ref player, ref letter);
 
             } while (!game.GameWon());
         }
 
-        private void NextPlayer()
+        public void GetNextPlayer(ref char player, ref char letter)
         {
-            if (Player == '1')
-            {
-                Player = '2';
-                Letter = 'O';
-            }
-            else
-            {
-                Player = '1';
-                Letter = 'X';
-
-            }
+            player = player == '1' ? player = '2' : player = '1';
+            letter = letter == 'X' ? letter = 'O' : letter = 'X';
         }
 
-        public string GetPlayerCoord(string currentBoard)
+        public string GetPlayerCoord(string currentBoard, char player, char letter)
         {
-            Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", Player, Letter);
+            Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", player, letter);
 
             var coord = Console.ReadLine()?.Split(',');
             var rowInput = int.Parse(coord[0]);
             var columnInput = int.Parse(coord[1]);
 
             Game game = new Game();
-            var foo = game.ChangeCurrentBoard(currentBoard, Letter, rowInput, columnInput);
+            var foo = game.ChangeCurrentBoard(currentBoard, letter, rowInput, columnInput);
             return foo;
         }
 

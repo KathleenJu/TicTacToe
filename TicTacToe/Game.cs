@@ -21,10 +21,9 @@ namespace TicTacToe
                         newBoard += arrayBoard[row][column];
                     }
                 }
-
                 newBoard += "\n";
             }
-            return DisplayBoard(newBoard.TrimEnd('\n'));
+            return newBoard.TrimEnd('\n');
         }
 
         public string AddInputToBoard(string[] arrayBoard, string newBoard, char letter, int row, int column)
@@ -48,10 +47,5 @@ namespace TicTacToe
             return arrayBoard[row][column] == '.';
         }
 
-        public string DisplayBoard(string currentBoard)
-        {
-            Console.WriteLine(currentBoard);
-            return currentBoard;
-        }
     }
 }

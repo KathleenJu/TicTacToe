@@ -10,6 +10,7 @@ namespace TicTacToe
     public class StartTicTacToe
     {
 
+
         public static void Main(string[] args)
         {
             var player = '1';
@@ -19,36 +20,36 @@ namespace TicTacToe
                                "...";
             Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + currentBoard);
 
-            StartTicTacToe game = new StartTicTacToe();
+            Game game = new Game();
 
             do
             {
-                currentBoard = game.GetPlayerCoord(currentBoard, player, letter);
-                game.GetNextPlayer(ref player, ref letter);
+                var currentPlayer = GetPlayerCoord(player, letter);
+                currentBoard = game.ChangeCurrentBoard(currentBoard, letter, currentPlayer[0], currentPlayer[1]);
+                Console.WriteLine(currentBoard);
+                //should check if won or ended or quit before going to next player
+                GetNextPlayer(ref player, ref letter);
 
-            } while (!game.GameWon());
+            } while (!GameWon());
         }
 
-        public void GetNextPlayer(ref char player, ref char letter)
+        public static void GetNextPlayer(ref char player, ref char letter)
         {
             player = player == '1' ? player = '2' : player = '1';
             letter = letter == 'X' ? letter = 'O' : letter = 'X';
         }
 
-        public string GetPlayerCoord(string currentBoard, char player, char letter)
+        public static int[] GetPlayerCoord(char player, char letter)
         {
             Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", player, letter);
-
             var coord = Console.ReadLine()?.Split(',');
             var rowInput = int.Parse(coord[0]);
             var columnInput = int.Parse(coord[1]);
 
-            Game game = new Game();
-            var foo = game.ChangeCurrentBoard(currentBoard, letter, rowInput, columnInput);
-            return foo;
+            return new int[] { rowInput, columnInput };
         }
 
-        public bool GameWon()
+        public static bool GameWon()
         {
             return false;
         }

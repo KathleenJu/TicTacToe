@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,16 +22,31 @@ namespace TicTacToe
             Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + currentBoard);
 
             Game game = new Game();
-
+            
+            var newBoard = currentBoard;
             do
             {
                 var currentPlayer = GetPlayerCoord(player, letter);
-                currentBoard = game.ChangeCurrentBoard(currentBoard, letter, currentPlayer[0], currentPlayer[1]);
-                Console.WriteLine(currentBoard);
-                //should check if won or ended or quit before going to next player
-                GetNextPlayer(ref player, ref letter);
-
-            } while (!GameWon());
+                currentBoard =
+                        game.ChangeCurrentBoard(currentBoard, letter, currentPlayer[0], currentPlayer[1]);
+                //separate this to a function (maybe in game class?)
+                if (currentBoard != newBoard)
+                {
+                    Console.WriteLine("Move accepted, here's the current board: ");
+                    Console.WriteLine(currentBoard);
+                    GetNextPlayer(ref player, ref letter);
+                }
+                else
+                {
+                    Console.WriteLine("Oh no, a piece is already at this place! Try again...");
+                }
+                newBoard = currentBoard;
+            }
+            while (!GameWon());
+            //should check if won or ended or quit before going to next player
+            
+            Console.WriteLine("you won {0}", player);
+            Console.ReadLine();
         }
 
         public static void GetNextPlayer(ref char player, ref char letter)

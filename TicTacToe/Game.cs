@@ -28,17 +28,14 @@ namespace TicTacToe
 
         public string AddInputToBoard(string[] arrayBoard, string newBoard, char letter, int row, int column)
         {
-            if (InputAValidMove(arrayBoard, row, column))
+            if (!InputAValidMove(arrayBoard, row, column))
             {
-                Console.WriteLine("Move accepted, here's the current board: ");
-                newBoard += letter;
+                newBoard += arrayBoard[row][column];
             }
             else
             {
-                Console.WriteLine("Oh no, a piece is already at this place! Try again...");
-                newBoard += arrayBoard[row][column];
+                newBoard += letter;
             }
-
             return newBoard;
         }
 

@@ -64,7 +64,7 @@ namespace TicTacToe
                 Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", player, letter);
 
                 var input = Console.ReadLine();
-                if (validCoord = InputAValidCoord(input))
+                if (InputAValidCoord(input))
                 {
                     var coord = input.Split(',');
                     rowInput = int.Parse(coord[0]) - 1;

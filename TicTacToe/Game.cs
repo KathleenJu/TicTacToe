@@ -4,45 +4,32 @@ namespace TicTacToe
 {
     public class Game
     {
+        public bool InputAValidMove(string currentBoard, int row, int column)
+        {
+            var arrayOfCurrentBoard = currentBoard.Split('\n');
+            return arrayOfCurrentBoard[row][column] == '.';
+        }
+
         public string ChangeCurrentBoard(string currentBoard, char letter, int rowInput, int columnInput)
         {
             var newBoard = string.Empty;
-            var arrayBoard = currentBoard.Split('\n');
-            for (var row = 0; row < arrayBoard.Length; row++)
+            var arrayOfCurrentBoard = currentBoard.Split('\n');
+            for (var row = 0; row < arrayOfCurrentBoard.Length; row++)
             {
-                for (var column = 0; column < arrayBoard.Length; column++)
+                for (var column = 0; column < arrayOfCurrentBoard.Length; column++)
                 {
-                    if (row == rowInput - 1 && column == columnInput - 1)
+                    if (row == rowInput && column == columnInput)
                     {
-                        newBoard = AddInputToBoard(arrayBoard, newBoard, letter, row, column);
+                        newBoard += letter;
                     }
                     else
                     {
-                        newBoard += arrayBoard[row][column];
+                        newBoard += arrayOfCurrentBoard[row][column];
                     }
                 }
                 newBoard += "\n";
             }
             return newBoard.TrimEnd('\n');
         }
-
-        public string AddInputToBoard(string[] arrayBoard, string newBoard, char letter, int row, int column)
-        {
-            if (!InputAValidMove(arrayBoard, row, column))
-            {
-                newBoard += arrayBoard[row][column];
-            }
-            else
-            {
-                newBoard += letter;
-            }
-            return newBoard;
-        }
-
-        public bool InputAValidMove(string[] arrayBoard, int row, int column)
-        {
-            return arrayBoard[row][column] == '.';
-        }
-
     }
 }

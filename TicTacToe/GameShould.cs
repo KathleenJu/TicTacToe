@@ -50,7 +50,7 @@ namespace TicTacToe
          )]
         public void ReturnTheCorrectPositionOfInputIfMoveIsValid(string expectedBoard, char letter, int row, int column)
         {
-            var actualBoard = game.ChangeCurrentBoard(currentBoard, letter, row, column);
+            var actualBoard = game.ChangeCurrentBoard(currentBoard, letter, row - 1, column - 1);
             Assert.AreEqual(actualBoard, expectedBoard);
         }
     }

@@ -51,7 +51,7 @@ namespace TicTacToe
 
         public static bool InputAValidCoord(string input)
         {
-            return input != null && Regex.IsMatch(input, @"[1-3],[1-3]");
+            return input != null && Regex.IsMatch(input, "[1-3],[1-3]");
         }
 
         public static int[] GetPlayerCoord(char player, char letter)

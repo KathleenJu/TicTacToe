@@ -20,35 +20,53 @@ namespace TicTacToe
             var currentBoard = "...\n" +
                                "...\n" +
                                "...";
-            Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + currentBoard);
+            Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + OutputCurrentBoard(currentBoard));
 
             Game game = new Game();
+            var endOfGame = game.ReturnCurrentBoard(currentBoard, letter);
             do
             {
                 var currentPlayerCoord = GetPlayerCoord(player, letter);
-
-                //separate this to a function (maybe in game class?)
                 if (game.InputAValidMove(currentBoard, currentPlayerCoord[0], currentPlayerCoord[1]))
                 {
-                    currentBoard =
-                        game.ChangeCurrentBoard(currentBoard, letter, currentPlayerCoord[0], currentPlayerCoord[1]);
-                    Console.WriteLine("Move accepted, here's the current board: ");
-                    Console.WriteLine(currentBoard);
-                    GetNextPlayer(ref player, ref letter);
+                    currentBoard = game.ChangeCurrentBoard(currentBoard, letter, currentPlayerCoord[0],
+                        currentPlayerCoord[1]);
+                    //Console.WriteLine("currentboard contains won {0}", currentBoard.Contains("won"));
+                    if (!currentBoard.Contains("won"))
+                    {
+                        if (!currentBoard.Contains("draw"))
+                        {
+                            Console.WriteLine("Move accepted, here's the current board: ");
+                            Console.WriteLine(currentBoard);
+                            GetNextPlayer(ref player, ref letter);
+                        }
+                    }
                 }
                 else
                 {
                     Console.WriteLine("Oh no, a piece is already at this place! Try again...");
                 }
-
-            }
-            while (!GameWon());
+            } while (true);
             //should check if won or ended or quit before going to next player
 
             Console.WriteLine("you won {0}", player);
             Console.ReadLine();
         }
 
+        public static string OutputCurrentBoard(string currentBoard)
+        {
+            var newBoard = string.Empty;
+            var arrayOfCurrentBoard = currentBoard.Split('\n');
+            for (var row = 0; row < arrayOfCurrentBoard.Length; row++)
+            {
+                for (var column = 0; column < arrayOfCurrentBoard.Length; column++)
+                {
+                    newBoard += " " + arrayOfCurrentBoard[row][column] + " ";
+                }
+                newBoard+= "\n";
+            }
+            return newBoard;
+        }
         public static bool InputAValidCoord(string input)
         {
             return input != null && Regex.IsMatch(input, "[1-3],[1-3]");

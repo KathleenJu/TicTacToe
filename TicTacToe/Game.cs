@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 
 namespace TicTacToe
 {
@@ -29,7 +31,28 @@ namespace TicTacToe
                 }
                 newBoard += "\n";
             }
-            return newBoard.TrimEnd('\n');
+
+            return ReturnCurrentBoard(newBoard.TrimEnd('\n'), letter);
+        }
+
+        
+        public string ReturnCurrentBoard(string currentBoard, char letter)
+        {
+            var checkEndOfGame = new EndGame();
+            var hasAWinner = checkEndOfGame.HasWinner(currentBoard, letter);
+            if (currentBoard.Contains('.'))
+            {
+                return hasAWinner ? "Move accepted, well done you've won the game!\n" + ResetBoard(): currentBoard;
+            }
+            return "\nGame was a draw." + ResetBoard();
+        }
+        public string ResetBoard()
+        {
+            var resetBoard = "...\n" +
+                               "...\n" +
+                               "...";
+
+            return resetBoard;
         }
     }
 }

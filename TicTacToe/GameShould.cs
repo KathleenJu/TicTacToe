@@ -53,5 +53,46 @@ namespace TicTacToe
             var actualBoard = game.ChangeCurrentBoard(currentBoard, letter, row - 1, column - 1);
             Assert.AreEqual(actualBoard, expectedBoard);
         }
+
+        [TestCase(
+            "X0." +
+            "\nXXX" +
+            "\n.00",
+            'X',
+             true
+            ),
+        TestCase(
+            "XOO" +
+            "\nOX." +
+            "\nOX.",
+            'X',
+            false
+            ),
+         TestCase(
+             "XO." +
+             "\nXO." +
+             "\nXOX",
+             'X',
+             true
+         ),
+         TestCase(
+             "XOX\n" +
+             ".O.\n" +
+             ".OX",
+             'O',
+             true
+         ), TestCase(
+             "OXX" +
+             "\nXOO" +
+             "\nX.O",
+             'O',
+             true
+         )]
+        public void ReturnAwinnerOrDrawGame(string currentBoard, char letter, bool expectedResult)
+        {
+            var game = new EndGame();
+            var actualResult = game.HasWinner(currentBoard, letter);
+            Assert.AreEqual(actualResult, expectedResult);
+        }
     }
 }

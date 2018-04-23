@@ -12,33 +12,33 @@ namespace TicTacToe
 {
     public class StartTicTacToe
     {
-        public static char Player = '1';
-        public static char Letter = 'X';
+        private static char _player = '1';
+        private static char _letter = 'X';
+        public static int Row { get; set; } = 0;
+        public static int Column { get; set; } = 0;
 
-        public static string CurrentBoard = "...\n" +
+        private static string _currentBoard = "...\n" +
                            "...\n" +
                            "...";
 
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + DisplayCurrentBoard(CurrentBoard));
-
-            Game game = new Game();
+            Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + DisplayCurrentBoard(_currentBoard));
 
             do
             {
-                Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", Player,
-                       Letter);
+                Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", _player,
+                       _letter);
                 var input = Console.ReadLine();
                 if (input == "q")
                 {
-                    Console.WriteLine("Player " + Player + " gave up. End of game");
+                    Console.WriteLine("Player " + _player + " gave up. End of game");
                     break;
                 }
                 GetPlayerCoord(input);
             }
-            while (!game.GameEnded(CurrentBoard, Letter));
+            while (!CheckIfGameEnded());
 
             Console.ReadLine();
         }
@@ -47,46 +47,45 @@ namespace TicTacToe
         {
             do
             {
-                if (!InputAValidCoord(input))
+                if (InputAValidCoord(input))
                 {
-                    Console.WriteLine("Please enter a valid coordination. Row and Column must be both between 1 to 3.");
+                    var coord = input.Split(',');
+                    Row = int.Parse(coord[0]) - 1;
+                    Column = int.Parse(coord[1]) - 1;
+                    PlayCurrentTurn();
                     continue;
                 }
-                var coord = input.Split(',');
-                var rowInput = int.Parse(coord[0]) - 1;
-                var columnInput = int.Parse(coord[1]) - 1;
-
-                PlayCurrentTurn(rowInput, columnInput);
+                Console.WriteLine("Please enter a valid coordination. Row and Column must be both between 1 to 3.");
             } while (false);
         }
 
-        private static void PlayCurrentTurn(int rowInput, int columnInput)
+        private static void PlayCurrentTurn()
         {
             Game game = new Game();
+            var newBoard = game.ChangeCurrentBoard(_currentBoard, _letter, Row, Column);
             do
             {
-                if (!game.InputAValidMove(CurrentBoard, rowInput, columnInput))
+                if (_currentBoard != newBoard)
                 {
-                    Console.WriteLine("Oh no, a piece is already at this place! Try again...");
+                    _currentBoard = newBoard;
+                    ReturnCurrentBoard();
                     continue;
                 }
-                CurrentBoard = game.ChangeCurrentBoard(CurrentBoard, Letter, rowInput, columnInput);
-                ReturnCurrentBoard();
+                Console.WriteLine("Oh no, a piece is already at this place! Try again...");
             } while (false);
         }
 
         private static void ReturnCurrentBoard()
         {
-            Game game = new Game();
-            if (game.GameEnded(CurrentBoard, Letter))
+            if (!CheckIfGameEnded())
             {
-                Console.WriteLine("{0}", GameResult(CurrentBoard));
-                Console.WriteLine(DisplayCurrentBoard(CurrentBoard));
+                Console.WriteLine("Move accepted, here's the current board: ");
+                Console.WriteLine(DisplayCurrentBoard(_currentBoard));
+                GetNextPlayer(ref _player, ref _letter);
                 goto done;
             }
-            Console.WriteLine("Move accepted, here's the current board: ");
-            Console.WriteLine(DisplayCurrentBoard(CurrentBoard));
-            GetNextPlayer(ref Player, ref Letter);
+            Console.WriteLine("{0}", GameResult());
+            Console.WriteLine(DisplayCurrentBoard(_currentBoard));
             done:;
         }
 
@@ -116,10 +115,19 @@ namespace TicTacToe
             }
             return newBoard;
         }
-
-        public static string GameResult(string currentBoard)
+        public static bool CheckIfGameEnded()
         {
-            if (!currentBoard.Contains('.'))
+            var checkEndOfGame = new EndGame();
+            if (_currentBoard.Contains('.'))
+            {
+                return checkEndOfGame.HasWinner(_currentBoard, _letter);
+            }
+            return true;
+        }
+
+        public static string GameResult()
+        {
+            if (!_currentBoard.Contains('.'))
             {
                 return "Game was a draw";
             }

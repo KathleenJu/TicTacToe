@@ -6,13 +6,17 @@ namespace TicTacToe
 {
     public class Game
     {
-        public bool InputAValidMove(string currentBoard, int row, int column)
+        public string ChangeCurrentBoard(string currentBoard, char letter, int row, int column)
         {
             var arrayOfCurrentBoard = currentBoard.Split('\n');
-            return arrayOfCurrentBoard[row][column] == '.';
+            if (arrayOfCurrentBoard[row][column] == '.')
+            {
+                return AddInputToCurrentBoard(currentBoard, letter, row, column);
+            }
+            return currentBoard;
         }
 
-        public string ChangeCurrentBoard(string currentBoard, char letter, int rowInput, int columnInput)
+        private static string AddInputToCurrentBoard(string currentBoard, char letter, int rowInput, int columnInput)
         {
             var newBoard = string.Empty;
             var arrayOfCurrentBoard = currentBoard.Split('\n');
@@ -32,19 +36,7 @@ namespace TicTacToe
 
                 newBoard += "\n";
             }
-
             return newBoard.TrimEnd('\n');
-        }
-
-        public bool GameEnded(string currentBoard, char letter)
-        {
-            var checkEndOfGame = new EndGame();
-            var hasAWinner = checkEndOfGame.HasWinner(currentBoard, letter);
-            if (currentBoard.Contains('.'))
-            {
-                return hasAWinner;
-            }
-            return true;
         }
     }
 }

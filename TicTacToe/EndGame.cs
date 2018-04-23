@@ -13,7 +13,7 @@ namespace TicTacToe
         {
             var arrayOfCurrentBoard = currentBoard.Split('\n');
             var winningLine = false;
-            foreach (var line in a)
+            foreach (var line in _winningCoords)
             {
                 winningLine = line.All(coord => letter == arrayOfCurrentBoard[coord.Row][coord.Column]);
                 if (winningLine)
@@ -24,7 +24,7 @@ namespace TicTacToe
             return winningLine;
         }
 
-        private List<List<Coord>> a = new List<List<Coord>>
+        private readonly List<List<Coord>> _winningCoords = new List<List<Coord>>
         {
             new List<Coord>{ new Coord( 0, 0), new Coord( 0, 1), new Coord( 0, 2)},
             new List<Coord>{ new Coord( 1, 0), new Coord( 1, 1), new Coord( 1, 2)},

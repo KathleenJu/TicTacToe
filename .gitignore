@@ -1,2 +1,7 @@
 .vs/
 /packages/*/
+TicTacToe/bin/*/
+TicTacToe/obj/*/
+TicTacToe/Properties/*/
+TicTacToe/App.config
+TicTacToe/packages.config

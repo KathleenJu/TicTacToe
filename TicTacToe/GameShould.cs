@@ -10,7 +10,7 @@ namespace TicTacToe
     [TestFixture]
     class GameShould
     {
-        Game game = new Game();
+        CurrentBoard game = new CurrentBoard();
         string currentBoard = "..." +
                               "\n..." +
                               "\n...";

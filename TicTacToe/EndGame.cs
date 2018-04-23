@@ -13,7 +13,7 @@ namespace TicTacToe
         {
             var arrayOfCurrentBoard = currentBoard.Split('\n');
             var winningLine = false;
-            foreach (var line in _winningCoords)
+            foreach (var line in WinningCoords)
             {
                 winningLine = line.All(coord => letter == arrayOfCurrentBoard[coord.Row][coord.Column]);
                 if (winningLine)
@@ -24,16 +24,16 @@ namespace TicTacToe
             return winningLine;
         }
 
-        private readonly List<List<Coord>> _winningCoords = new List<List<Coord>>
+        public List<List<Coord>> WinningCoords { get; } = new List<List<Coord>>
         {
-            new List<Coord>{ new Coord( 0, 0), new Coord( 0, 1), new Coord( 0, 2)},
-            new List<Coord>{ new Coord( 1, 0), new Coord( 1, 1), new Coord( 1, 2)},
-            new List<Coord>{ new Coord( 2, 0), new Coord( 2, 1), new Coord( 2, 2)},
-            new List<Coord>{ new Coord( 0, 0), new Coord( 1, 0), new Coord( 2, 0)},
-            new List<Coord>{ new Coord( 0, 1), new Coord( 1, 1), new Coord( 2, 1)},
-            new List<Coord>{ new Coord( 0, 2), new Coord( 1, 2), new Coord( 2, 2)},
-            new List<Coord>{ new Coord( 0, 0), new Coord( 1, 1), new Coord( 2, 2)},
-            new List<Coord>{ new Coord( 2, 0), new Coord( 1, 1), new Coord( 0, 2)}
+            new List<Coord> {new Coord(0, 0), new Coord(0, 1), new Coord(0, 2)},
+            new List<Coord> {new Coord(1, 0), new Coord(1, 1), new Coord(1, 2)},
+            new List<Coord> {new Coord(2, 0), new Coord(2, 1), new Coord(2, 2)},
+            new List<Coord> {new Coord(0, 0), new Coord(1, 0), new Coord(2, 0)},
+            new List<Coord> {new Coord(0, 1), new Coord(1, 1), new Coord(2, 1)},
+            new List<Coord> {new Coord(0, 2), new Coord(1, 2), new Coord(2, 2)},
+            new List<Coord> {new Coord(0, 0), new Coord(1, 1), new Coord(2, 2)},
+            new List<Coord> {new Coord(2, 0), new Coord(1, 1), new Coord(0, 2)}
         };
 
         public class Coord

@@ -36,18 +36,6 @@ namespace TicTacToe
             return newBoard.TrimEnd('\n');
         }
 
-
-        public string ReturnCurrentBoard(string currentBoard, char letter)
-        {
-            var checkEndOfGame = new EndGame();
-            var hasAWinner = checkEndOfGame.HasWinner(currentBoard, letter);
-            if (currentBoard.Contains('.'))
-            {
-                return hasAWinner ? "Move accepted, well done you've won the game!\n" + currentBoard : currentBoard;
-            }
-
-            return "\nGame was a draw." + currentBoard;
-        }
         public bool GameEnded(string currentBoard, char letter)
         {
             var checkEndOfGame = new EndGame();
@@ -57,19 +45,6 @@ namespace TicTacToe
                 return hasAWinner;
             }
             return true;
-        }
-
-        public bool foo(string currentBoard)
-        {
-            if (!currentBoard.Contains('.'))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
         }
     }
 }

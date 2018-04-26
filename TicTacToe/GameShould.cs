@@ -58,9 +58,9 @@ namespace TicTacToe
 
              2, 3
          )]
-        public void ReturnTheCorrectPositionOfInputIfMoveIsValid(string expectedBoard, char letter, int row, int column)
+        public void ReturnTheCorrectPositionOfInputIfMoveIsValid(string expectedBoard, char playerSymbol, int row, int column)
         {
-            var actualBoard = game.ChangeCurrentBoard(currentBoard, letter, row - 1, column - 1);
+            var actualBoard = game.ChangeCurrentBoard(currentBoard, playerSymbol, row - 1, column - 1);
             Assert.AreEqual(actualBoard, expectedBoard);
         }
 
@@ -108,10 +108,10 @@ namespace TicTacToe
 
              true
          )]
-        public void ReturnAwinnerOrDrawGame(string currentBoard, char letter, bool expectedResult)
+        public void ReturnAwinnerOrDrawGame(string currentBoard, char playerSymbol, bool expectedResult)
         {
             var game = new EndGame();
-            var actualResult = game.HasWinner(currentBoard, letter);
+            var actualResult = game.HasWinner(currentBoard, playerSymbol);
             Assert.AreEqual(actualResult, expectedResult);
         }
     }

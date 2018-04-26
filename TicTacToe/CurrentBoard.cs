@@ -6,37 +6,39 @@ namespace TicTacToe
 {
     public class CurrentBoard
     {
-        public string ChangeCurrentBoard(string currentBoard, char letter, int row, int column)
+        public string ChangeCurrentBoard(string currentBoard, char playerSymbol, int row, int column)
         {
-            var arrayOfCurrentBoard = currentBoard.Split('\n');
-            if (arrayOfCurrentBoard[row][column] == '.')
+            const char newLine = '\n';
+            const char emptySpot = '.';
+            var currentBoardLines = currentBoard.Split(newLine);
+            if (currentBoardLines[row][column] == emptySpot)
             {
-                return AddInputToCurrentBoard(currentBoard, letter, row, column);
+                return AddInputToCurrentBoard(currentBoard, playerSymbol, row, column);
             }
             return currentBoard;
         }
 
-        private static string AddInputToCurrentBoard(string currentBoard, char letter, int rowInput, int columnInput)
+        private static string AddInputToCurrentBoard(string currentBoard, char playerSymbol, int rowInput, int columnInput)
         {
+            const char newLine = '\n';
             var newBoard = string.Empty;
-            var arrayOfCurrentBoard = currentBoard.Split('\n');
-            for (var row = 0; row < arrayOfCurrentBoard.Length; row++)
+            var currentBoardLines = currentBoard.Split(newLine);
+            for (var row = 0; row < currentBoardLines.Length; row++)
             {
-                for (var column = 0; column < arrayOfCurrentBoard.Length; column++)
+                for (var column = 0; column < currentBoardLines.Length; column++)
                 {
                     if (row == rowInput && column == columnInput)
                     {
-                        newBoard += letter;
+                        newBoard += playerSymbol;
                     }
                     else
                     {
-                        newBoard += arrayOfCurrentBoard[row][column];
+                        newBoard += currentBoardLines[row][column];
                     }
                 }
-
-                newBoard += "\n";
+                newBoard += newLine;
             }
-            return newBoard.TrimEnd('\n');
+            return newBoard.TrimEnd(newLine);
         }
     }
 }

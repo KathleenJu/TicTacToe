@@ -1,7 +1,7 @@
 .vs/
 /packages/*/
-TicTacToe/bin/*/
-TicTacToe/obj/*/
-TicTacToe/Properties/*/
-TicTacToe/App.config
-TicTacToe/packages.config
+*.DotSettings.user
+/TicTacToe/Properties/*/
+/TicTacToe/bin/*/
+/TicTacToe/obj/*/
+>>>>>>> refactor

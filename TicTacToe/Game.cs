@@ -13,7 +13,7 @@ namespace TicTacToe
     public class Game
     {
         public static char Player { get; set; }
-        public static char Letter { get; set; }
+        public static char PlayerSymbol { get; set; }
         public static int Row { get; set; }
         public static int Column { get; set; }
 
@@ -23,26 +23,27 @@ namespace TicTacToe
         public static void Main(string[] args)
         {
             Player = '1';
-            Letter = 'X';
-            CurrentBoard = "...\n" +
-                           "...\n" +
+            PlayerSymbol = 'X';
+            CurrentBoard = "..." + "\n" +
+                           "..." + "\n" +
                            "...";
 
             Console.WriteLine("Welcome to Tic Tac Toe! \nHere's the current board:\n" + DisplayCurrentBoard(CurrentBoard));
 
             do
             {
+                const string quitGame = "q";
                 Console.Write("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", Player,
-                       Letter);
+                       PlayerSymbol);
                 var input = Console.ReadLine();
-                if (input == "q")
+                if (input == quitGame)
                 {
                     Console.WriteLine("Player " + Player + " gave up. End of game");
                     break;
                 }
                 GetPlayerCoord(input);
             }
-            while (!CheckIfGameEnded());
+            while (!HasGameEnded());
 
             Console.ReadLine();
         }
@@ -57,42 +58,46 @@ namespace TicTacToe
                     Row = int.Parse(coord[0]) - 1;
                     Column = int.Parse(coord[1]) - 1;
                     PlayCurrentTurn();
-                    continue;
                 }
-                Console.WriteLine("Please enter a valid coordination. Row and Column must be both between 1 to 3.");
+                else
+                {
+                    Console.WriteLine("Please enter a valid coordination. Row and Column must be both between 1 to 3.");
+                }
             } while (false);
         }
 
         private static void PlayCurrentTurn()
         {
             CurrentBoard board = new CurrentBoard();
-            var newBoard = board.ChangeCurrentBoard(CurrentBoard, Letter, Row, Column);
+            var newBoard = board.ChangeCurrentBoard(CurrentBoard, PlayerSymbol, Row, Column);
             do
             {
                 if (CurrentBoard != newBoard)
                 {
                     CurrentBoard = newBoard;
                     ReturnCurrentBoard();
-                    continue;
                 }
-                Console.WriteLine("Oh no, a piece is already at this place! Try again...");
+                else
+                {
+                    Console.WriteLine("Oh no, a piece is already at this place! Try again...");
+                }
             } while (false);
         }
 
         private static void ReturnCurrentBoard()
         {
-            if (!CheckIfGameEnded())
+            if (!HasGameEnded())
             {
                 Console.WriteLine("Move accepted, here's the current board: ");
                 Console.WriteLine(DisplayCurrentBoard(CurrentBoard));
                 GetNextPlayer();
-                goto done;
             }
-            Console.WriteLine("{0}", GameResult());
-            Console.WriteLine(DisplayCurrentBoard(CurrentBoard));
-            done:;
+            else
+            {
+                Console.WriteLine("{0}", GameResult());
+                Console.WriteLine(DisplayCurrentBoard(CurrentBoard));
+            }
         }
-
 
         public static bool InputAValidCoord(string input)
         {
@@ -102,36 +107,39 @@ namespace TicTacToe
         public static void GetNextPlayer()
         {
             Player = Player == '1' ? Player = '2' : Player = '1';
-            Letter = Letter == 'X' ? Letter = 'O' : Letter = 'X';
+            PlayerSymbol = PlayerSymbol == 'X' ? PlayerSymbol = 'O' : PlayerSymbol = 'X';
         }
 
         public static string DisplayCurrentBoard(string currentBoard)
         {
+            const char newLine = '\n';
             var newBoard = string.Empty;
-            var arrayOfCurrentBoard = currentBoard.Split('\n');
-            for (var row = 0; row < arrayOfCurrentBoard.Length; row++)
+            var currentBoardLines = currentBoard.Split(newLine);
+            for (var row = 0; row < currentBoardLines.Length; row++)
             {
-                for (var column = 0; column < arrayOfCurrentBoard.Length; column++)
+                for (var column = 0; column < currentBoardLines.Length; column++)
                 {
-                    newBoard += " " + arrayOfCurrentBoard[row][column] + " ";
+                    newBoard += " " + currentBoardLines[row][column] + " ";
                 }
-                newBoard += "\n";
+                newBoard += newLine;
             }
             return newBoard;
         }
-        public static bool CheckIfGameEnded()
+        public static bool HasGameEnded()
         {
+            const char emptySpot = '.';
             var checkEndOfGame = new EndGame();
-            if (CurrentBoard.Contains('.'))
+            if (CurrentBoard.Contains(emptySpot))
             {
-                return checkEndOfGame.HasWinner(CurrentBoard, Letter);
+                return checkEndOfGame.HasWinner(CurrentBoard, PlayerSymbol);
             }
             return true;
         }
 
         public static string GameResult()
         {
-            if (!CurrentBoard.Contains('.'))
+            const char emptySpot = '.';
+            if (!CurrentBoard.Contains(emptySpot))
             {
                 return "Game was a draw";
             }

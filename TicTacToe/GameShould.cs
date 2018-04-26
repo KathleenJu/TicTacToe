@@ -11,41 +11,51 @@ namespace TicTacToe
     class GameShould
     {
         CurrentBoard game = new CurrentBoard();
-        string currentBoard = "..." +
-                              "\n..." +
-                              "\n...";
+        string currentBoard = "..." + "\n" +
+                              "..." + "\n" +
+                              "...";
         [TestCase(
-            "X.." +
-            "\n..." +
-            "\n...",
+            "X.." + "\n" +
+            "..." + "\n" +
+            "...",
+
             'X',
+
             1, 1
             ),
         TestCase(
-            "..." +
-            "\n.X." +
-            "\n...",
+            "..." + "\n" +
+            ".X." + "\n" +
+            "...",
+
             'X',
+
             2, 2
             ),
          TestCase(
-             "..." +
-             "\n..." +
-             "\n..X",
+             "..." + "\n" +
+             "..." + "\n" +
+             "..X",
+
              'X',
+
              3, 3
          ),
          TestCase(
-             ".O." +
-             "\n..." +
-             "\n...",
+             ".O." + "\n" +
+             "..." + "\n" +
+             "...",
+
              'O',
+
              1, 2
          ), TestCase(
-             "..." +
-             "\n..O" +
-             "\n...",
+             "..." + "\n" +
+             "..O" + "\n" +
+             "...",
+
              'O',
+
              2, 3
          )]
         public void ReturnTheCorrectPositionOfInputIfMoveIsValid(string expectedBoard, char letter, int row, int column)
@@ -55,37 +65,47 @@ namespace TicTacToe
         }
 
         [TestCase(
-            "X0." +
-            "\nXXX" +
-            "\n.00",
-            'X',
+            "XO." + "\n" +
+            "XXX" + "\n" +
+            ".OO",
+
+             'X',
+
              true
             ),
         TestCase(
-            "XOO" +
-            "\nOX." +
-            "\nOX.",
+            "XOO" + "\n" +
+            "OX." + "\n" +
+            "OX.",
+
             'X',
+
             false
             ),
          TestCase(
-             "XO." +
-             "\nXO." +
-             "\nXOX",
+             "XO." + "\n" +
+             "XO." + "\n" +
+             "XOX",
+
              'X',
+
              true
          ),
          TestCase(
-             "XOX\n" +
-             ".O.\n" +
+             "XOX" + "\n" +
+             ".O." + "\n" +
              ".OX",
+
              'O',
+
              true
          ), TestCase(
-             "OXX" +
-             "\nXOO" +
-             "\nX.O",
+             "OXX" + "\n" +
+             "XOO" + "\n" +
+             "X.O",
+
              'O',
+
              true
          )]
         public void ReturnAwinnerOrDrawGame(string currentBoard, char letter, bool expectedResult)

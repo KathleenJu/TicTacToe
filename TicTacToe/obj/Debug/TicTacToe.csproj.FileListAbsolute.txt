@@ -7,3 +7,6 @@ C:\tictactoe\TicTacToe\TicTacToe\obj\Debug\TicTacToe.exe
 C:\tictactoe\TicTacToe\TicTacToe\obj\Debug\TicTacToe.pdb
 C:\tictactoe\TicTacToe\TicTacToe\bin\Debug\TicTacToe.pdb
 C:\tictactoe\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojResolveAssemblyReference.cache
+C:\tictactoe\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.CopyComplete
+C:\tictactoe\TicTacToe\TicTacToe\bin\Debug\System.dll
+C:\tictactoe\TicTacToe\TicTacToe\bin\Debug\System.xml

@@ -9,19 +9,19 @@ namespace TicTacToe
 {
     public class EndGame
     {
-        public bool HasWinner(string currentBoard, char letter)
+        public bool HasWinner(string currentBoard, char playerSymbol)
         {
-            var arrayOfCurrentBoard = currentBoard.Split('\n');
-            var winningLine = false;
+            const char newLine = '\n';
+            var currentBoardLines = currentBoard.Split(newLine);
             foreach (var line in WinningCoords)
             {
-                winningLine = line.All(coord => letter == arrayOfCurrentBoard[coord.Row][coord.Column]);
-                if (winningLine)
+                var isAWinningLine = line.All(coord => playerSymbol == currentBoardLines[coord.Row][coord.Column]);
+                if (isAWinningLine)
                 {
-                    break;
+                    return true;
                 }
             }
-            return winningLine;
+            return false;
         }
 
         public List<List<Coord>> WinningCoords { get; } = new List<List<Coord>>

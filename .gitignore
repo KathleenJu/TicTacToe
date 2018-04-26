@@ -1,2 +1,6 @@
 .vs/
 /packages/*/
+*.DotSettings.user
+/TicTacToe/Properties/*/
+/TicTacToe/bin/*/
+/TicTacToe/obj/*/

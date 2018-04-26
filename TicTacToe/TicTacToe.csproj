@@ -51,6 +51,7 @@
     <Compile Include="EndGame.cs" />
     <Compile Include="CurrentBoard.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="PlayerCoordinates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GameShould.cs" />
   </ItemGroup>

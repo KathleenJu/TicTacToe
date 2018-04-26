@@ -15,7 +15,7 @@ namespace TicTacToe
             var currentBoardLines = currentBoard.Split(newLine);
             foreach (var line in WinningCoords)
             {
-                var isAWinningLine = line.All(coord => playerSymbol == currentBoardLines[coord.Row][coord.Column]);
+                var isAWinningLine = line.All(coord => currentBoardLines[coord.Row][coord.Column] == playerSymbol);
                 if (isAWinningLine)
                 {
                     return true;
@@ -35,16 +35,5 @@ namespace TicTacToe
             new List<Coord> {new Coord(0, 0), new Coord(1, 1), new Coord(2, 2)},
             new List<Coord> {new Coord(2, 0), new Coord(1, 1), new Coord(0, 2)}
         };
-
-        public class Coord
-        {
-            public int Row { get; set; }
-            public int Column { get; set; }
-            public Coord(int row, int column)
-            {
-                Row = row;
-                Column = column;
-            }
-        }
     }
 }

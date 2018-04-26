@@ -14,8 +14,8 @@ namespace TicTacToe
     {
         public static char Player { get; set; }
         public static char PlayerSymbol { get; set; }
-        public static int Row { get; set; }
-        public static int Column { get; set; }
+        //public static int Row { get; set; }
+        //public static int Column { get; set; }
 
         public static string CurrentBoard { get; set; }
 
@@ -55,9 +55,10 @@ namespace TicTacToe
                 if (InputAValidCoord(input))
                 {
                     var coord = input.Split(',');
-                    Row = int.Parse(coord[0]) - 1;
-                    Column = int.Parse(coord[1]) - 1;
-                    PlayCurrentTurn();
+                    var row = int.Parse(coord[0]) - 1;
+                    var column = int.Parse(coord[1]) - 1;
+                    var playerCoord = new Coord(row, column);
+                    PlayCurrentTurn(playerCoord);
                 }
                 else
                 {
@@ -66,10 +67,10 @@ namespace TicTacToe
             } while (false);
         }
 
-        private static void PlayCurrentTurn()
+        private static void PlayCurrentTurn(Coord playerCoord)
         {
             CurrentBoard board = new CurrentBoard();
-            var newBoard = board.ChangeCurrentBoard(CurrentBoard, PlayerSymbol, Row, Column);
+            var newBoard = board.ChangeCurrentBoard(CurrentBoard, PlayerSymbol, playerCoord.Row, playerCoord.Column);
             do
             {
                 if (CurrentBoard != newBoard)

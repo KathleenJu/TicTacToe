@@ -1,9 +1,5 @@
 .vs/
 /packages/*/
-TicTacToe.sln.DotSettings.user
-/TicTacToe/Properties/*/
-/TicTacToe/bin/
-/TicTacToe/obj/
 _ReSharper.*
 bin
 obj

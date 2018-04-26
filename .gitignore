@@ -1,5 +1,5 @@
 .vs/
 /packages/*/
-_ReSharper.*
-bin
-obj
+_ReSharper.*/
+/TicTacToe/**bin/
+/TicTacToe/**obj/

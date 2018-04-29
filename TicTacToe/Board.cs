@@ -26,6 +26,19 @@ namespace TicTacToe
                 CurrentGameBoard[coordinates.Row][coordinates.Column] = playerSymbol;
         }
 
+        public string DisplayCurrentBoard()
+        {
+            var displayBoard = String.Empty;
+            foreach (var row in CurrentGameBoard)
+            {
+                foreach (var value in row)
+                {
+                    displayBoard += " " + (char)value + " ";
+                }
+                displayBoard += Environment.NewLine;
+            }
+            return displayBoard;
+        }
         
     }
 }

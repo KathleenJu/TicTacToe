@@ -35,16 +35,53 @@ namespace TicTacToe
         private void PlayTurn(Player currentPlayer)
         {
             AddPlayerInputToBoard(currentPlayer);
+            CheckIfGameEnded(currentPlayer);
             Console.WriteLine("Move accepted, here's the current board:\n" + Board.DisplayCurrentBoard());
         }
 
         private void AddPlayerInputToBoard(Player currentPlayer)
         {
-           
+            var validPosition = false;
+            while (!validPosition)
+            {
+                var position = currentPlayer.GetPlayerCoord();
+                validPosition = Board.PositionOnBoardIsEmpty(position);
+                if (validPosition)
+                {
+                    Board.ChangeCurrentBoard(position, currentPlayer.PlayerSymbol);
+                }
+                else
+                {
+                    Console.WriteLine("Oh no, a piece is already at this place! Try again...");
+                }
+            }
+        }
+        public void CheckIfGameEnded(Player currentPlayer)
+        {
+            CheckEndGame = new EndGame(Board.CurrentGameBoard, currentPlayer.PlayerSymbol);
+            _gameOver = CheckEndGame.HasWinner();
+
+            if (_gameOver) DisplayGameResult();
         }
 
-
+        public void DisplayGameResult()
+        {
+            if (!CheckEndGame.HasWinner())
+            {
+                    //checkfor draw
+            }
+            else
+            {
+                Console.WriteLine("Move accepted, well done you've won the game!");
+            }
+            Console.WriteLine(Board.DisplayCurrentBoard());
+            Console.ReadLine();
+            Environment.Exit(0);
+        }
     }
+
+
+}
 
 
 }

@@ -5,18 +5,31 @@ namespace TicTacToe
     public class TicTacToeBoard
     {
         public List<List<Symbol>> GameBoard { get; set; }
-        private int _boardHeight { get; }
-        private int _boardWidth { get; }
-        private Symbol _symbol { get; }
+        private int BoardHeight { get; }
+        private int BoardWidth { get; }
+        private Symbol Symbol { get; }
 
         public TicTacToeBoard(int boardHeight, int boardWidth, Symbol symbol)
         {
             GameBoard = new List<List<Symbol>>();
-            _boardHeight = boardHeight;
-            _boardWidth = boardWidth;
-            _symbol = symbol;
+            BoardHeight = boardHeight;
+            BoardWidth = boardWidth;
+            Symbol = symbol;
 
+            SetGameBoard();
         }
 
+        public void SetGameBoard()
+        {
+            for (var i = 0; i < BoardHeight; i++)
+            {
+                List<Symbol> row = new List<Symbol>();
+                for (var j = 0; j < BoardWidth; j++)
+                {
+                    row.Add(Symbol);
+                }
+                GameBoard.Add(row);
+            }
+        }
     }
 }

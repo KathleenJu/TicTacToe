@@ -10,109 +10,59 @@ namespace TicTacToe
     [TestFixture]
     class GameShould
     {
-        CurrentBoard game = new CurrentBoard();
-        string currentBoard = "..." + "\n" +
-                              "..." + "\n" +
-                              "...";
+        Board board = new Board();
+
         [TestCase(
-            "X.." + "\n" +
-            "..." + "\n" +
-            "...",
+             " X  .  . " + "\r\n" +
+             " .  .  . " + "\r\n" +
+             " .  .  . " + "\r\n",
 
-            'X',
+             Symbol.Cross,
 
-            1, 1
-            ),
-        TestCase(
-            "..." + "\n" +
-            ".X." + "\n" +
-            "...",
-
-            'X',
-
-            2, 2
-            ),
+             1, 1
+         ),
          TestCase(
-             "..." + "\n" +
-             "..." + "\n" +
-             "..X",
+             " X  .  . " + "\r\n" +
+             " .  O  . " + "\r\n" +
+             " .  .  . " + "\r\n",
 
-             'X',
+             Symbol.Naught,
+
+             2, 2
+         ),
+         TestCase(
+             " X  .  . " + "\r\n" +
+             " .  O  . " + "\r\n" +
+             " .  .  X " + "\r\n",
+
+             Symbol.Cross,
 
              3, 3
          ),
          TestCase(
-             ".O." + "\n" +
-             "..." + "\n" +
-             "...",
+             " X  O  . " + "\r\n" +
+             " .  O  . " + "\r\n" +
+             " .  .  X " + "\r\n",
 
-             'O',
+             Symbol.Naught,
 
              1, 2
          ), TestCase(
-             "..." + "\n" +
-             "..O" + "\n" +
-             "...",
+             " X  O  . " + "\r\n" +
+             " .  O  X " + "\r\n" +
+             " .  .  X " + "\r\n",
 
-             'O',
+             Symbol.Cross,
 
              2, 3
          )]
-        public void ReturnTheCorrectPositionOfInputIfMoveIsValid(string expectedBoard, char playerSymbol, int row, int column)
+        public void ReturnTheCorrectPositionOfInputIfMoveIsValid(string expectedBoard, Symbol playerSymbol, int row,
+            int column)
         {
-            var actualBoard = game.ChangeCurrentBoard(currentBoard, playerSymbol, row - 1, column - 1);
+            var coordinates = new Coordinates(row - 1, column - 1);
+            board.ChangeCurrentBoard(coordinates, playerSymbol);
+            var actualBoard = board.DisplayCurrentBoard();
             Assert.AreEqual(actualBoard, expectedBoard);
-        }
-
-        [TestCase(
-            "XO." + "\n" +
-            "XXX" + "\n" +
-            ".OO",
-
-             'X',
-
-             true
-            ),
-        TestCase(
-            "XOO" + "\n" +
-            "OX." + "\n" +
-            "OX.",
-
-            'X',
-
-            false
-            ),
-         TestCase(
-             "XO." + "\n" +
-             "XO." + "\n" +
-             "XOX",
-
-             'X',
-
-             true
-         ),
-         TestCase(
-             "XOX" + "\n" +
-             ".O." + "\n" +
-             ".OX",
-
-             'O',
-
-             true
-         ), TestCase(
-             "OXX" + "\n" +
-             "XOO" + "\n" +
-             "X.O",
-
-             'O',
-
-             true
-         )]
-        public void ReturnAwinnerOrDrawGame(string currentBoard, char playerSymbol, bool expectedResult)
-        {
-            var game = new EndGame();
-            var actualResult = game.HasWinner(currentBoard, playerSymbol);
-            Assert.AreEqual(actualResult, expectedResult);
         }
     }
 }

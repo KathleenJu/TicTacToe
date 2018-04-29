@@ -10,3 +10,4 @@ C:\tictactoe\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csprojResolveAssemblyRefere
 C:\tictactoe\TicTacToe\TicTacToe\obj\Debug\TicTacToe.csproj.CopyComplete
 C:\tictactoe\TicTacToe\TicTacToe\bin\Debug\System.dll
 C:\tictactoe\TicTacToe\TicTacToe\bin\Debug\System.xml
+C:\tictactoe\TicTacToe\TicTacToe\bin\Debug\nunit.framework.pdb

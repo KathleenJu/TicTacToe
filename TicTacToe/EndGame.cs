@@ -9,13 +9,33 @@ namespace TicTacToe
 {
     public class EndGame
     {
-        public bool HasWinner(string currentBoard, char playerSymbol)
+        private readonly List<List<Symbol>> _gameBoard;
+        private readonly Symbol _playerSymbol;
+
+        public EndGame(List<List<Symbol>> currentBoard, Symbol playerSymbol)
         {
-            const char newLine = '\n';
-            var currentBoardLines = currentBoard.Split(newLine);
+            _gameBoard = currentBoard;
+            _playerSymbol = playerSymbol;
+        }
+
+
+        private List<List<Coordinates>> WinningCoords { get; } = new List<List<Coordinates>>
+        {
+            new List<Coordinates> {new Coordinates(0, 0), new Coordinates(0, 1), new Coordinates(0, 2)},
+            new List<Coordinates> {new Coordinates(1, 0), new Coordinates(1, 1), new Coordinates(1, 2)},
+            new List<Coordinates> {new Coordinates(2, 0), new Coordinates(2, 1), new Coordinates(2, 2)},
+            new List<Coordinates> {new Coordinates(0, 0), new Coordinates(1, 0), new Coordinates(2, 0)},
+            new List<Coordinates> {new Coordinates(0, 1), new Coordinates(1, 1), new Coordinates(2, 1)},
+            new List<Coordinates> {new Coordinates(0, 2), new Coordinates(1, 2), new Coordinates(2, 2)},
+            new List<Coordinates> {new Coordinates(0, 0), new Coordinates(1, 1), new Coordinates(2, 2)},
+            new List<Coordinates> {new Coordinates(2, 0), new Coordinates(1, 1), new Coordinates(0, 2)}
+        };
+
+        public bool HasWinner()
+        {
             foreach (var line in WinningCoords)
             {
-                var isAWinningLine = line.All(coord => currentBoardLines[coord.Row][coord.Column] == playerSymbol);
+                var isAWinningLine = line.All(coord => _gameBoard[coord.Row][coord.Column] == _playerSymbol);
                 if (isAWinningLine)
                 {
                     return true;
@@ -24,16 +44,6 @@ namespace TicTacToe
             return false;
         }
 
-        public List<List<Coord>> WinningCoords { get; } = new List<List<Coord>>
-        {
-            new List<Coord> {new Coord(0, 0), new Coord(0, 1), new Coord(0, 2)},
-            new List<Coord> {new Coord(1, 0), new Coord(1, 1), new Coord(1, 2)},
-            new List<Coord> {new Coord(2, 0), new Coord(2, 1), new Coord(2, 2)},
-            new List<Coord> {new Coord(0, 0), new Coord(1, 0), new Coord(2, 0)},
-            new List<Coord> {new Coord(0, 1), new Coord(1, 1), new Coord(2, 1)},
-            new List<Coord> {new Coord(0, 2), new Coord(1, 2), new Coord(2, 2)},
-            new List<Coord> {new Coord(0, 0), new Coord(1, 1), new Coord(2, 2)},
-            new List<Coord> {new Coord(2, 0), new Coord(1, 1), new Coord(0, 2)}
-        };
+        
     }
 }

@@ -14,11 +14,8 @@ namespace TicTacToe
     {
         private static void Main(string[] args)
         {
-            while (true)
-            {
-                var game = new TicTacToe();
-                game.StartGame();
-            }
+            var game = new TicTacToeGame();
+            game.StartGame();
         }
     }
 }

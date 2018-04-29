@@ -21,7 +21,7 @@ namespace TicTacToe
             PlayerSymbol = playerSymbol;
         }
 
-        public Coordinates GetPlayerCoord()
+        public Coordinates GetPlayerInput()
         {
             do
             {
@@ -38,13 +38,13 @@ namespace TicTacToe
                     Environment.Exit(0);
                 }
 
-                SetPlayerCoord(input);
+                SetPlayerCoordinates(input);
             } while (Coordinates == null);
 
             return Coordinates;
         }
 
-        private static void SetPlayerCoord(string input)
+        private static void SetPlayerCoordinates(string input)
         {
             if (InputAValidCoord(input))
             {

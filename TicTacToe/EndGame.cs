@@ -43,7 +43,20 @@ namespace TicTacToe
             }
             return false;
         }
+        public bool IsADrawGame()
+        {
+            if (!HasWinner())
+            {
+                foreach (var row in _gameBoard)
+                {
+                    var hasEmptyPosition = row.Contains(Symbol.Empty);
+                    if (hasEmptyPosition) return false;
+                }
+                return true;
+            }
+            return false;
+        }
 
-        
+
     }
 }

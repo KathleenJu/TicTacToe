@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="EndGame.cs" />
     <Compile Include="ConsoleGame.cs" />
-    <Compile Include="GameBoard.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Player\Number.cs" />

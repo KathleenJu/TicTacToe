@@ -68,7 +68,10 @@ namespace TicTacToe
         {
             if (!CheckEndGame.HasWinner())
             {
-                    //checkfor draw
+                if (CheckEndGame.IsADrawGame())
+                {
+                    Console.WriteLine("It's a draw game.");
+                }
             }
             else
             {
@@ -79,9 +82,4 @@ namespace TicTacToe
             Environment.Exit(0);
         }
     }
-
-
-}
-
-
 }
